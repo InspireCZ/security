@@ -1,5 +1,11 @@
 # InspireCZ/Security
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](license.md)
+[![Build Status][ico-travis]][link-travis]
+[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
 
 Balíček pro práci se šifrováním a hesly.
 
@@ -128,3 +134,19 @@ $ phpunit test
 ## Bezpečnost
 
 Pokud objevíte jakýkoli bezpečnostní problém, kontaktujte nás prosím na e-mail support@inspire.cz místo využití issue.
+
+
+
+[ico-version]: https://img.shields.io/packagist/v/InspireCZ/Security.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-BSD-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/InspireCZ/Security/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/InspireCZ/Security.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/InspireCZ/Security.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/InspireCZ/Security.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/InspireCZ/Security
+[link-travis]: https://travis-ci.org/InspireCZ/Security
+[link-scrutinizer]: https://scrutinizer-ci.com/g/InspireCZ/Security/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/InspireCZ/Security
+[link-downloads]: https://packagist.org/packages/InspireCZ/Security
+[link-author]: https://github.com/InspireCZ
