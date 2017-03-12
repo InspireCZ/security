@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.8/phpunit.xsd"
+         backupGlobals="false"
+         bootstrap="./bootstrap.php"
+         colors="true"
+         beStrictAboutTestSize="true"
+         convertErrorsToExceptions="false"
+         convertNoticesToExceptions="false"
+         convertWarningsToExceptions="false"
+>
+
+    <!--definice slozke test-suitu-->
+    <testsuites>
+        <testsuite name="Netwings Test Suite">
+            <directory suffix="Test.php">./</directory>
+        </testsuite>
+    </testsuites>
+
+    <!--Generovani code coverage-->
+    <logging>
+        <log type="junit" target="../tmp/phpunit-out.xml" logIncompleteSkipped="false"/>
+        <log type="coverage-html" charset="UTF-8" yui="true" highlight="true" target="../tmp/phpunit-coverage" lowUpperBound="33" highLowerBound="66" />
+        <log type="coverage-clover" target="../tmp/phpunit-coverage.xml" />
+    </logging>
+
+    <!--definice filtru -> nastavime root pro code coverage a odstranime Fixtures a bootstrap-->
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../src/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
