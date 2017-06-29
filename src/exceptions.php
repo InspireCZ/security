@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 
 /**
- * This file is part of the Netwings (https://www.netwings.cz/)
+ * This file is part of the Webspire (https://www.webspire.eu/)
  *
  * Copyright (c) 2002 INSPIRE CZ s.r.o. (support@inspire.cz)
  *

@@ -1,7 +1,7 @@
 Licenses
 ========
 
-Good news! You may use Netwings Framework under the terms of either
+Good news! You may use Webspire Framework under the terms of either
 the New BSD License or the GNU General Public License (GPL) version 2 or 3.
 
 The BSD License is recommended for most projects. It is easy to understand and it
@@ -9,7 +9,7 @@ places almost no restrictions on what you can do with the framework. If the GPL
 fits better to your project, you can use the framework under this license.
 
 You don't have to notify anyone which license you are using. You can freely
-use Netwings Framework in commercial projects as long as the copyright header
+use Webspire Framework in commercial projects as long as the copyright header
 remains intact.
 
 New BSD License

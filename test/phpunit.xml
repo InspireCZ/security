@@ -11,7 +11,7 @@
 
     <!--definice slozke test-suitu-->
     <testsuites>
-        <testsuite name="Netwings Test Suite">
+        <testsuite name="Webspire Test Suite">
             <directory suffix="Test.php">./</directory>
         </testsuite>
     </testsuites>
