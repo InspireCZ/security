@@ -9,12 +9,12 @@
  * source code.
  */
 
-
 namespace Inspire\Security\Test\Crypt;
-
 
 use Inspire\Security\Crypt\OpenSSLPrivateKeyCrypt;
 use Inspire\Security\Crypt\OpenSSLPublicKeyCrypt;
+use Inspire\Security\InvalidArgumentException;
+use Inspire\Security\InvalidKeyFileException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,56 +25,45 @@ use PHPUnit\Framework\TestCase;
 class OpenSSLPrivateKeyCryptTest extends TestCase
 {
 
-    const NON_SENSE_KEY_PATH = __DIR__.'/non-sense.pem';
+    const NON_SENSE_KEY_PATH = __DIR__ . '/non-sense.pem';
 
-    const VALID_PUBLIC_KEY_PATH = __DIR__.'/public_key_valid.pem';
+    const VALID_PUBLIC_KEY_PATH = __DIR__ . '/public_key_valid.pem';
 
-    const VALID_PRIVATE_KEY_PATH = __DIR__.'/private_key_valid.pem';
-    const INVALID_PRIVATE_KEY_PATH = __DIR__.'/private_key_invalid.pem';
+    const VALID_PRIVATE_KEY_PATH = __DIR__ . '/private_key_valid.pem';
+    const INVALID_PRIVATE_KEY_PATH = __DIR__ . '/private_key_invalid.pem';
 
-    const VALID_PUBLIC_KEY_PASSWORD_PATH = __DIR__.'/public_key_password.pem';
-    const VALID_PRIVATE_KEY_PASSWORD_PATH = __DIR__.'/private_key_password.pem';
+    const VALID_PUBLIC_KEY_PASSWORD_PATH = __DIR__ . '/public_key_password.pem';
+    const VALID_PRIVATE_KEY_PASSWORD_PATH = __DIR__ . '/private_key_password.pem';
 
-    /**
-     * @expectedException \Inspire\Security\InvalidArgumentException
-     */
     public function testConstructInvalidPath()
     {
+        self::expectException(\Inspire\Security\InvalidArgumentException::class);
         OpenSSLPrivateKeyCrypt::fromFile(self::NON_SENSE_KEY_PATH);
     }
 
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testConstructInvalidPrivatePem()
     {
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
         OpenSSLPrivateKeyCrypt::fromFile(self::INVALID_PRIVATE_KEY_PATH);
     }
 
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testConstructInvalidPassword()
     {
+        $this->expectException(InvalidKeyFileException::class);
         OpenSSLPrivateKeyCrypt::fromFile(self::VALID_PRIVATE_KEY_PASSWORD_PATH, 'invalidPassword');
     }
 
     public function testConstructValidPassword()
     {
-        OpenSSLPrivateKeyCrypt::fromFile(self::VALID_PRIVATE_KEY_PASSWORD_PATH, 'inspire');
+        $key = OpenSSLPrivateKeyCrypt::fromFile(self::VALID_PRIVATE_KEY_PASSWORD_PATH, 'inspire');
+
+        self::assertInstanceOf(OpenSSLPrivateKeyCrypt::class, $key);
     }
 
-    public function testConstruct()
-    {
-        $key = file_get_contents(self::VALID_PRIVATE_KEY_PATH);
-        new OpenSSLPrivateKeyCrypt($key);
-    }
-
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testConstructString()
     {
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
+
         new OpenSSLPrivateKeyCrypt('key in string');
     }
 
@@ -102,13 +91,13 @@ class OpenSSLPrivateKeyCryptTest extends TestCase
         self::assertEquals($plaintext, $cryptPublic->decrypt($cryptedtext));
     }
 
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testEncryptPrivatePrivate()
     {
         $cryptPrivate = OpenSSLPrivateKeyCrypt::fromFile(self::VALID_PRIVATE_KEY_PATH);
         $plaintext = 'foo';
+
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
+
         $cryptedtext = $cryptPrivate->encrypt($plaintext);
         $cryptPrivate->decrypt($cryptedtext);
     }
@@ -136,5 +125,4 @@ class OpenSSLPrivateKeyCryptTest extends TestCase
 
         self::assertEquals($plaintext, $cryptPrivate->decrypt($cryptedtext));
     }
-
 }

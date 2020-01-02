@@ -39,5 +39,4 @@ class BCryptPasswordHashGeneratorTest extends TestCase
         $this->assertTrue($generator->verify($plaintext, $hash));
         $this->assertFalse($generator->verify('baz', $hash));
     }
-
 }

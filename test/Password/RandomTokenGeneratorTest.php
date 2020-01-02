@@ -11,7 +11,6 @@
 
 namespace Inspire\Security\Test\Password;
 
-
 use Inspire\Security\Password\RandomTokenGenerator;
 use PHPUnit\Framework\TestCase;
 
@@ -38,13 +37,11 @@ class RandomTokenGeneratorTest extends TestCase
         $this->assertSame(1, preg_match('~^[a-z]{10}$~', $pwd));
     }
 
-    /**
-     * @expectedException \Nette\InvalidArgumentException
-     */
     public function testGenerateZero()
     {
         $generator = new RandomTokenGenerator();
+
+        self::expectException(\Nette\InvalidArgumentException::class);
         $this->assertSame(0, strlen($generator->generate(0)));
     }
-
 }

@@ -128,7 +128,7 @@ echo $generator->generate(); // výstup: edb433bdd7c13851c7c68cb31a5acf33
 ## Testy
 
 ``` bash
-$ phpunit test
+$ vendor/bin/phpunit test
 ```
 
 ## Bezpečnost

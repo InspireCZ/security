@@ -12,7 +12,6 @@
 
 namespace Inspire\Security\Password;
 
-
 use Inspire\Security\InvalidArgumentException;
 use Nette\Security\Passwords;
 
@@ -48,5 +47,4 @@ class BCryptPasswordHashGenerator implements IPasswordHashGenerator
     {
         return Passwords::verify($password, $hash);
     }
-
 }

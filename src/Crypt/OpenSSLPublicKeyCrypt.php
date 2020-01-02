@@ -87,5 +87,4 @@ class OpenSSLPublicKeyCrypt extends AbstractKeyCrypt implements IKeyCrypt
 
         return $result;
     }
-
 }

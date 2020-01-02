@@ -9,9 +9,7 @@
  * source code.
  */
 
-
 namespace Inspire\Security\Test\Crypt;
-
 
 use Inspire\Security\Crypt\OpenSSLPrivateKeyCrypt;
 use Inspire\Security\Crypt\OpenSSLPublicKeyCrypt;
@@ -25,53 +23,39 @@ use PHPUnit\Framework\TestCase;
 class OpenSSLPublicKeyCryptTest extends TestCase
 {
 
-    const NON_SENSE_KEY_PATH = __DIR__.'/non-sense.pem';
+    const NON_SENSE_KEY_PATH = __DIR__ . '/non-sense.pem';
 
-    const VALID_PUBLIC_KEY_PATH = __DIR__.'/public_key_valid.pem';
-    const INVALID_PUBLIC_KEY_PATH = __DIR__.'/public_key_invalid.pem';
+    const VALID_PUBLIC_KEY_PATH = __DIR__ . '/public_key_valid.pem';
+    const INVALID_PUBLIC_KEY_PATH = __DIR__ . '/public_key_invalid.pem';
 
-    const VALID_PRIVATE_KEY_PATH = __DIR__.'/private_key_valid.pem';
+    const VALID_PRIVATE_KEY_PATH = __DIR__ . '/private_key_valid.pem';
 
-    const VALID_PUBLIC_KEY_PASSWORD_PATH = __DIR__.'/public_key_password.pem';
-    const VALID_PRIVATE_KEY_PASSWORD_PATH = __DIR__.'/private_key_password.pem';
+    const VALID_PUBLIC_KEY_PASSWORD_PATH = __DIR__ . '/public_key_password.pem';
+    const VALID_PRIVATE_KEY_PASSWORD_PATH = __DIR__ . '/private_key_password.pem';
 
-    /**
-     * @expectedException \Inspire\Security\InvalidArgumentException
-     */
     public function testConstructInvalidPath()
     {
+        self::expectException(\Inspire\Security\InvalidArgumentException::class);
         OpenSSLPublicKeyCrypt::fromFile(self::NON_SENSE_KEY_PATH);
     }
 
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testConstructInvalidPublicPem()
     {
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
         OpenSSLPublicKeyCrypt::fromFile(self::INVALID_PUBLIC_KEY_PATH);
     }
 
-    public function testConstruct()
-    {
-        $key = file_get_contents(self::VALID_PUBLIC_KEY_PATH);
-        new OpenSSLPublicKeyCrypt($key);
-    }
-
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testConstructString()
     {
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
         new OpenSSLPublicKeyCrypt('key in string');
     }
 
-    /**
-     * @expectedException \Inspire\Security\InvalidKeyFileException
-     */
     public function testEncryptPublicByPublic()
     {
         $cryptPublic = OpenSSLPublicKeyCrypt::fromFile(self::VALID_PUBLIC_KEY_PATH);
         $plaintext = 'foo';
+        self::expectException(\Inspire\Security\InvalidKeyFileException::class);
         $cryptedtext = $cryptPublic->encrypt($plaintext);
         $cryptPublic->decrypt($cryptedtext);
     }
@@ -123,5 +107,4 @@ class OpenSSLPublicKeyCryptTest extends TestCase
 
         self::assertEquals($plaintext, $cryptPublic->decrypt($cryptedtext));
     }
-
 }

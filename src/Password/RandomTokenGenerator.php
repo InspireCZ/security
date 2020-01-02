@@ -13,7 +13,6 @@ namespace Inspire\Security\Password;
 
 use Nette\Utils\Random;
 
-
 /**
  * Generator nahodnych tokenu/retezcu. Obalka nad Nette Random
  *
@@ -36,5 +35,4 @@ class RandomTokenGenerator implements ITokenGenerator
     {
         return Random::generate($length, $charlist);
     }
-
 }

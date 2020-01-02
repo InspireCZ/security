@@ -12,7 +12,6 @@
 
 namespace Inspire\Security\Password;
 
-
 /**
  * Rozhrani generatoru nahodnoych tokenu
  *
