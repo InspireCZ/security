@@ -23,7 +23,7 @@ class UrlSafeSymetricEncoderDecoder implements ISymetricEncoderDecoder
     public function encode(string $plaintext): string
     {
         $encoded = $this->codec->encode($plaintext);
-        $unpacked = \unpack('H*', $encoded);
+        $unpacked = @\unpack('H*', $encoded);
 
         if (false === $unpacked) {
             throw new InvalidArgumentException("Unable to unpack encoded string");
@@ -34,14 +34,12 @@ class UrlSafeSymetricEncoderDecoder implements ISymetricEncoderDecoder
 
     public function decode(string $plaintext): string
     {
-        $packed = \pack('H*', $plaintext);
+        $packed = @\pack('H*', $plaintext);
 
         if (false === $packed) {
             throw new InvalidArgumentException("Unable to pack decoded string");
         }
 
-        $decoded = $this->codec->decode($packed);
-
-        return $decoded;
+        return $this->codec->decode($packed);
     }
 }
