@@ -26,7 +26,7 @@ class UrlSafeSymetricEncoderDecoder implements ISymetricEncoderDecoder
         $unpacked = @\unpack('H*', $encoded);
 
         if (false === $unpacked) {
-            throw new InvalidArgumentException("Unable to unpack encoded string");
+            throw new InvalidArgumentException('Unable to unpack encoded string');
         }
 
         return $unpacked[1];
@@ -34,10 +34,14 @@ class UrlSafeSymetricEncoderDecoder implements ISymetricEncoderDecoder
 
     public function decode(string $plaintext): string
     {
+        if (false === \ctype_xdigit($plaintext)) {
+            throw new InvalidArgumentException('Unable to( decode given string - unexpected input format');
+        }
+
         $packed = @\pack('H*', $plaintext);
 
         if (false === $packed) {
-            throw new InvalidArgumentException("Unable to pack decoded string");
+            throw new InvalidArgumentException('Unable to pack decoded string');
         }
 
         return $this->codec->decode($packed);

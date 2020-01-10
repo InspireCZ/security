@@ -4,6 +4,7 @@ namespace Inspire\Security\Test\Crypt;
 
 use Inspire\Security\Crypt\ISymetricEncoderDecoder;
 use Inspire\Security\Crypt\UrlSafeSymetricEncoderDecoder;
+use Inspire\Security\InvalidArgumentException;
 use Mockery;
 use Nette\Utils\Strings;
 
@@ -34,6 +35,15 @@ class UrlSafeSymetricEncoderDecoderTest extends \PHPUnit\Framework\TestCase
         $decoded = $encoder->decode($encoded);
 
         self::assertEquals($plainTextRev, $decoded);
+    }
+
+    public function testDecodeInvalidCharacters()
+    {
+        $plainText = 'ZZ Top!';
+        $encoder = new UrlSafeSymetricEncoderDecoder($this->getCodec($plainText));
+
+        self::expectException(InvalidArgumentException::class);
+        $encoder->decode($plainText);
     }
 
     private function getCodec(string $input): ISymetricEncoderDecoder
