@@ -12,6 +12,7 @@
 namespace Inspire\Security\Crypt;
 
 use Inspire\Security\InvalidArgumentException;
+use Inspire\Security\SecurityException;
 
 /**
  * Symetricke sifrovani textu pomoci klice.
@@ -20,7 +21,6 @@ use Inspire\Security\InvalidArgumentException;
  */
 class OpenSSLSymetricEncoderDecoder implements ISymetricEncoderDecoder
 {
-
     /** Pouzivana sifra */
     const CIPHER = 'AES-256-CTR';
 
@@ -41,7 +41,7 @@ class OpenSSLSymetricEncoderDecoder implements ISymetricEncoderDecoder
     /**
      * Pripravi klic pro sifrovani.
      *
-     * Pouzivame sifru AES-256-CTR, klic by melo mit 256 bitu
+     * Pouzivame sifru AES-256-CTR, klic by mel mit 256 bitu
      *
      * @param string $key
      *
@@ -66,13 +66,17 @@ class OpenSSLSymetricEncoderDecoder implements ISymetricEncoderDecoder
     public function encode(string $plaintext): string
     {
         $ivSize = openssl_cipher_iv_length(self::CIPHER);
-        $iv = openssl_random_pseudo_bytes($ivSize);
+        $iv = openssl_random_pseudo_bytes($ivSize, $strong);
+
+        if (false === $strong) {
+            throw new SecurityException('openssl_random_pseudo_bytes was unable to generate '
+                . 'cryptographically strong pseudo bytes.');
+        }
 
         $ciphertext = openssl_encrypt($plaintext, self::CIPHER, $this->key, OPENSSL_RAW_DATA, $iv);
-        $ciphertext = $iv.$ciphertext;
-        $ciphertext = base64_encode($ciphertext);
+        $ciphertext = $iv . $ciphertext;
 
-        return $ciphertext;
+        return base64_encode($ciphertext);
     }
 
     /**
@@ -95,8 +99,6 @@ class OpenSSLSymetricEncoderDecoder implements ISymetricEncoderDecoder
 
         $ciphertext = substr($ciphertext, $ivSize);
 
-        $plaintext = openssl_decrypt($ciphertext, self::CIPHER, $this->key, OPENSSL_RAW_DATA, $iv);
-
-        return $plaintext;
+        return openssl_decrypt($ciphertext, self::CIPHER, $this->key, OPENSSL_RAW_DATA, $iv);
     }
 }

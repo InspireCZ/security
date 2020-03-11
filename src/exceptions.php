@@ -34,3 +34,11 @@ class InvalidKeyFileException extends \InvalidArgumentException implements IExce
 {
 
 }
+
+/**
+ * @author Martin Lutonsky <martin.lutonsky@inspire.cz>
+ */
+class SecurityException extends \RuntimeException implements IException
+{
+
+}
