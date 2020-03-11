@@ -64,7 +64,7 @@ class OpenSSLPrivateKeyCrypt extends AbstractKeyCrypt implements IKeyCrypt
      */
     public function encrypt(string $data): string
     {
-        $keyResource = openssl_get_privatekey($this->key, $this->password);
+        $keyResource = openssl_pkey_get_private($this->key, $this->password);
         openssl_private_encrypt($data, $result, $keyResource);
         $result = base64_encode($result);
 
@@ -81,7 +81,7 @@ class OpenSSLPrivateKeyCrypt extends AbstractKeyCrypt implements IKeyCrypt
     public function decrypt(string $data): string
     {
         $data = base64_decode($data);
-        $keyResource = openssl_get_privatekey($this->key, $this->password);
+        $keyResource = openssl_pkey_get_private($this->key, $this->password);
         openssl_private_decrypt($data, $result, $keyResource);
 
         if (null === $result) {
