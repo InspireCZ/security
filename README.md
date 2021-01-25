@@ -11,13 +11,13 @@ Balíček pro práci se šifrováním a hesly.
 
 ## Požadavky
 
-InspireCZ/Security vyžaduje PHP 7.0 nebo vyšší.
+InspireCZ/Security vyžaduje PHP 8.0 nebo vyšší.
 
 - [Nette/Security](https://github.com/nette/security)
 
 ## Instalace
 
-Nejlépší způsob jak InspireCZ/Security nainstalovat je pomocí Composeru
+Nejlepší způsob jak InspireCZ/Security nainstalovat je pomocí Composeru
 
 ``` bash
 $ composer require inspirecz/security
