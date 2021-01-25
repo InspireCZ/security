@@ -17,7 +17,7 @@ InspireCZ/Security vyžaduje PHP 7.0 nebo vyšší.
 
 ## Instalace
 
-Nejlépší způsob jak InspireCZ/Security nainstalovat je pomocí Composeru
+Nejlepší způsob jak InspireCZ/Security nainstalovat je pomocí Composeru
 
 ``` bash
 $ composer require inspirecz/security
