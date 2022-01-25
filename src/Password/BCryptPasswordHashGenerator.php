@@ -9,15 +9,13 @@
  * source code.
  */
 
-
 namespace Inspire\Security\Password;
 
-use Inspire\Security\InvalidArgumentException;
 use Nette\Security\Passwords;
 
 /**
  * Hash generator vyuzivajici Nettacky Passwords
- * @see Nette\Security\Passwords
+ * @see Passwords
  *
  * @author Martin Lutonsky <martin.lutonsky@inspire.cz>
  * @author Jan Zahorsky <jan.zahorsky@inspire.cz>
@@ -34,7 +32,7 @@ class BCryptPasswordHashGenerator implements IPasswordHashGenerator
      */
     public function generate(string $password): string
     {
-        return Passwords::hash($password);
+        return (new Passwords())->hash($password);
     }
 
     /**
@@ -45,6 +43,6 @@ class BCryptPasswordHashGenerator implements IPasswordHashGenerator
      */
     public function verify(string $password, string $hash): bool
     {
-        return Passwords::verify($password, $hash);
+        return (new Passwords())->verify($password, $hash);
     }
 }
